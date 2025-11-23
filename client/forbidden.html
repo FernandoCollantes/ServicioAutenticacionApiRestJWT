@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso Denegado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .forbidden-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        .home-button {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+
+        .home-button:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="forbidden-container">
+        <div class="icon">🚫</div>
+        <h1>403 - Acceso Denegado</h1>
+        <p>No tienes permisos para acceder a esta página</p>
+        <a href="index.html" class="home-button">Volver al Login</a>
+    </div>
+    <script>
+        console.log('🚫 forbidden.html cargado');
+        
+        // Limpiar token inválido automáticamente
+        console.log('🗑️ Limpiando token inválido de localStorage...');
+        localStorage.removeItem('authToken');
+        
+        // Manejar clic en botón
+        document.getElementById('backToLogin').addEventListener('click', function() {
+            console.log('🔙 Volviendo al login...');
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
