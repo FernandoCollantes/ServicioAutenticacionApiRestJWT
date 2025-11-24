@@ -413,7 +413,6 @@ Este proyecto es educativo y fue desarrollado como parte del currículo académi
 ## 🙏 Agradecimientos
 
 - Profesor Carlos Basulto Pardo por la guía y especificaciones del proyecto
-- Compañeros de clase por las pruebas y feedback
 - Documentación oficial de Node.js y Express
 
 ---
