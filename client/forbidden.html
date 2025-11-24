@@ -4,28 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso Denegado</title>
-    <link rel="stylesheet" href="css/styles.css">
-    
+    <link rel="stylesheet" href="css/forbiddenStyles.css">
 </head>
 <body>
-    <div class="forbidden-container">
-        <div class="icon">🚫</div>
-        <h1>403 - Acceso Denegado</h1>
-        <p>No tienes permisos para acceder a esta página</p>
-        <a href="index.html" class="home-button">Volver al Login</a>
-    </div>
+    <div class="forbidden-card">
+        <div class="card-body">
+            <h1 class="card-title">403 - Acceso Denegado</h5>
+            <p class="card-text">No tienes permisos para acceder a esta página</p>
+            <a href="index.html" class="home-button">Volver al Login</a>
+        </div>
+    </div> -
+    
     <script>
-        console.log('🚫 forbidden.html cargado');
+        console.log('forbidden.html cargado');
         
         // Limpiar token inválido automáticamente
-        console.log('🗑️ Limpiando token inválido de localStorage...');
+        console.log('Limpiando token inválido de localStorage...');
         localStorage.removeItem('authToken');
         
         // Manejar clic en botón
         document.getElementById('backToLogin').addEventListener('click', function() {
-            console.log('🔙 Volviendo al login...');
+            console.log('Volviendo al login...');
             window.location.href = 'index.html';
         });
     </script>
 </body>
+
 </html>

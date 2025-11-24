@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenido - Panel de Usuario</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/welcomeStyles.css">
     
 </head>
 
@@ -15,31 +15,26 @@
             Cargando información...
         </div>
 
-        <div id="welcomeContent" style="display: none;">
+        <div id="welcomeContent">
             <h1>¡Bienvenido, <span class="username" id="username"></span>!</h1>
 
             <div class="info-box">
                 <div class="info-item">
-                    <strong>🕐 Hora actual:</strong>
+                    <strong>Hora actual:</strong>
                     <span id="currentTime"></span>
                 </div>
                 <div class="info-item">
-                    <strong>📝 Mensaje:</strong>
+                    <strong>Mensaje:</strong>
                     <span id="welcomeMessage"></span>
                 </div>
+                <!-- BOTÓN DE PRUEBA TEMPORAL -->
+                <button class="IT-button" id="ITButton" onclick="probarTokenInvalido()">
+                    PRUEBA: Invalidar Token
+                </button>
+                <button class="logout-button" id="logoutButton">
+                    Cerrar Sesión
+                </button>
             </div>
-            <button class="logout-button" id="logoutButton">
-                🚪 Cerrar Sesión
-            </button>
-
-            <!-- BOTÓN DE PRUEBA TEMPORAL -->
-            <button onclick="probarTokenInvalido()"
-                style="width: 100%; padding: 12px; background: #f39c12; color: white; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px;">
-                🧪 PRUEBA: Invalidar Token
-            </button>
-            <button class="logout-button" id="logoutButton">
-                🚪 Cerrar Sesión
-            </button>
         </div>
     </div>
 

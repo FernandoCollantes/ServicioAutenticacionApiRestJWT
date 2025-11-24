@@ -1,10 +1,10 @@
-console.log('🟢 welcome.js cargado'); // ← LOG 1
+console.log('welcome.js cargado'); // ← LOG 1
 // Verificar autenticación
 if (!Auth.isAuthenticated()) {
-     console.log('❌ No hay token - Redirigiendo a login'); // ← LOG 2
+     console.log('No hay token - Redirigiendo a login'); // ← LOG 2
     window.location.href = 'index.html';
 }
-console.log('✅ Token existe - Continuando con welcome.html'); // ← LOG 3
+console.log('Token existe - Continuando con welcome.html'); // ← LOG 3
 const loadingMessage = document.getElementById('loadingMessage');
 const welcomeContent = document.getElementById('welcomeContent');
 const usernameSpan = document.getElementById('username');
@@ -14,10 +14,10 @@ const logoutButton = document.getElementById('logoutButton');
 
 // Cargar datos del usuario
 async function loadUserData() {
-    console.log('🔄 Iniciando loadUserData()'); // ← LOG 4
+    console.log('Iniciando loadUserData()'); // ← LOG 4
     try {
         const response = await Auth.fetchWithAuth('http://localhost:3000/api/welcome');
-        console.log('✅ Respuesta exitosa, procesando datos'); // ← LOG 5
+        console.log('Respuesta exitosa, procesando datos'); // ← LOG 5
         // Si Auth.fetchWithAuth() no lanzó error, significa que response.ok es true
         const data = await response.json();
         
@@ -31,19 +31,19 @@ async function loadUserData() {
         welcomeContent.style.display = 'block';
         
     } catch (error) {
-        console.log('❌ Error capturado en loadUserData()'); // ← LOG 6
-        console.log('❌ Tipo de error:', error.message); // ← LOG 7
+        console.log('Error capturado en loadUserData()'); // ← LOG 6
+        console.log('Tipo de error:', error.message); // ← LOG 7
         // Si llegamos aquí con error "Acceso denegado", 
         // Auth.fetchWithAuth() YA redirigió a forbidden.html
         // Solo manejamos otros errores (red, servidor caído, etc)
         if (error.message === 'Acceso denegado') {
-            console.log('🚫 Error es "Acceso denegado" - No hacer nada más'); // ← LOG 8
+            console.log('Error es "Acceso denegado" - No hacer nada más'); // ← LOG 8
             // No hacer nada, la redirección ya ocurrió
             return;
         }
         
         // Otros errores: ir a login
-        console.log('⚠️ Otro tipo de error - Redirigiendo a login'); // ← LOG 9
+        console.log('Otro tipo de error - Redirigiendo a login'); // ← LOG 9
         console.error('Error:', error);
         Auth.removeToken();
         window.location.href = 'index.html';
@@ -52,7 +52,7 @@ async function loadUserData() {
 
 // Cerrar sesión
 logoutButton.addEventListener('click', async () => {
-    console.log('🚪 Cerrando sesión...'); // ← LOG 10
+    console.log('Cerrando sesión...'); // ← LOG 10
     try {
         await Auth.fetchWithAuth('http://localhost:3000/api/logout', {
             method: 'POST'
@@ -65,18 +65,18 @@ logoutButton.addEventListener('click', async () => {
         window.location.href = 'index.html';
     }
 });
-console.log('🚀 Llamando a loadUserData()'); // ← LOG 11
+console.log('Llamando a loadUserData()'); // ← LOG 11
 // Cargar datos al iniciar
 loadUserData();
 // === FUNCIÓN DE PRUEBA ===
 // Esta función simula un token inválido SIN modificar manualmente localStorage
 function probarTokenInvalido() {
-    console.log('🧪 PRUEBA: Invalidando token...');
+    console.log('PRUEBA: Invalidando token...');
     
     // Cambiar el token por uno falso
     Auth.saveToken('token-falso-prueba-12345');
     
-    console.log('🔄 Recargando página con token inválido...');
+    console.log('Recargando página con token inválido...');
     
     // Recargar la página
     setTimeout(() => {
