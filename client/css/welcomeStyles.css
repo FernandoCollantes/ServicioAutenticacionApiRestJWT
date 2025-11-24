@@ -1,5 +1,4 @@
-
-/* estilos de welcome */
+/* Estilos para la página de bienvenida */
 
 * {
   margin: 0;
@@ -9,77 +8,95 @@
 
 body {
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #4a494b 100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 2vh 2vw;
 }
 
-.welcome-container {
+.welcome-card {
   background: white;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  padding: 5vh 4vw;
+  border-radius: 1vmin;
+  box-shadow: 0 1vh 2.5vh rgba(0, 0, 0, 0.2);
   width: 100%;
-  max-width: 600px;
+  max-width: 60vw;
 }
 
-h1 {
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.info-box {
-  background: #f8f9fa;
-  padding: 20px;
-  border-radius: 5px;
-  margin: 20px 0;
-}
-
-.info-item {
-  margin: 10px 0;
-  font-size: 16px;
-}
-
-.info-item strong {
-  color: #555;
-}
-
-.logout-button {
-  margin-top: 2.5%;
-  width: 100%;
-  padding: 12px;
-  background: #911204;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.logout-button:hover {
-  background: #c0392b;
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
 }
 
 .loading {
   text-align: center;
-  padding: 40px;
-  color: #666;
+  padding: 5vh 0;
+  color: #4a5568;
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
 }
 
-/* estilos botón invalidar token*/
-.IT-button {
+#welcomeContent {
+  display: none;
+}
+
+.card-title {
+  color: #4a5568;
+  margin-bottom: 2vh;
+  font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+  text-align: center;
+}
+
+.username {
+  color: #667eea;
+  font-weight: bold;
+}
+
+.info-box {
+  background: #f7fafc;
+  padding: 2.5vh 2.5vw;
+  border-radius: 0.8vmin;
+  margin: 2vh 0;
+  border-left: 0.4vmin solid #667eea;
+}
+
+.info-item {
+  margin: 1.5vh 0;
+  font-size: clamp(0.95rem, 1.7vw, 1.1rem);
+  color: #4a5568;
+  padding: 1vh 0;
+}
+
+.info-item strong {
+  color: #667eea;
+  font-weight: 600;
+}
+
+.logout-button {
   width: 100%;
-  padding: 12px;
-  background: #667eea;
+  padding: 1.5vh 0;
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
   color: white;
   border: none;
-  border-radius: 5px;
-  font-size: 16px;
+  border-radius: 0.5vmin;
+  font-size: clamp(0.9rem, 1.6vw, 1.05rem);
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 2vh; /*Separación del info-box */
+}
+
+.logout-button:hover {
+  transform: translateY(-0.3vh);
+  box-shadow: 0 0.5vh 1.5vh rgba(231, 76, 60, 0.3);
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .welcome-card {
+    max-width: 90vw;
+    padding: 4vh 6vw;
+  }
 }

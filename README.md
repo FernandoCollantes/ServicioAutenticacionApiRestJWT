@@ -40,20 +40,28 @@ Este proyecto es una aplicación web que implementa un sistema completo de auten
 
 ### Frontend (Cliente)
 - ✅ **Pantalla de Login**: Formulario de autenticación con validación
+- ✅ **Mensajes de Error con Códigos HTTP**: Muestra código de error (401) junto al mensaje
 - ✅ **Pantalla de Bienvenida**: Panel personalizado con información del usuario
-- ✅ **Pantalla de Error 403**: Página de acceso denegado
+- ✅ **Pantalla de Error 403**: Página de acceso denegado para usuarios no autenticados o tokens inválidos
 - ✅ **Gestión de Sesiones**: Uso de localStorage para persistencia
-- ✅ **Redirecciones Automáticas**: Basadas en el estado de autenticación
-- ✅ **Interfaz Responsive**: Diseño adaptable a diferentes dispositivos
+- ✅ **Redirecciones Automáticas**: 
+  - Login exitoso → welcome.html
+  - Sin token → forbidden.html (403)
+  - Token inválido → forbidden.html (403)
+  - Cerrar sesión → index.html
+- ✅ **Interfaz Responsive**: Diseño adaptable con viewport units (vh, vw, vmin)
+- ✅ **Paleta de Colores Coherente**: 4 colores basados en psicología del color
 
 ### Backend (Servidor)
 - ✅ **API RESTful**: Endpoints organizados y estructurados
 - ✅ **Autenticación por Token**: Generación y validación de tokens
 - ✅ **Validación de Credenciales**: Verificación contra base de datos simulada
-- ✅ **Manejo de Errores HTTP**: Códigos de estado apropiados (401, 403)
+- ✅ **Manejo de Errores HTTP**: Códigos de estado apropiados con códigos en respuesta JSON
+  - 400 Bad Request (datos faltantes)
+  - 401 Unauthorized (credenciales incorrectas)
+  - 403 Forbidden (sin token o token inválido)
 - ✅ **CORS Habilitado**: Configuración para peticiones cross-origin
 - ✅ **Middleware de Autenticación**: Protección de rutas sensibles
-
 ---
 
 ## 🛠️ Tecnologías Utilizadas
@@ -64,23 +72,21 @@ Este proyecto es una aplicación web que implementa un sistema completo de auten
 - **CORS**: Middleware para habilitar peticiones cross-origin
 
 ### Frontend
-- **HTML5**: Estructura semántica
-- **CSS3**: Estilos con gradientes y animaciones
-- **JavaScript (ES6+)**: Lógica del cliente
+- **HTML5**: Estructura semántica con cards bootstrap-like
+- **CSS3**: Estilos con gradientes, animaciones y viewport units
+- **JavaScript (ES6+)**: Lógica del cliente con clases y async/await
 - **Fetch API**: Peticiones HTTP asíncronas
 - **localStorage**: Almacenamiento persistente del lado del cliente
+
+### Diseño
+- **Viewport Units**: vw, vh, vmin para diseño completamente responsive
+- **clamp()**: Tipografía fluida y escalable
+- **Flexbox**: Layout moderno y flexible
+- **CSS Custom Properties**: Variables para paleta de colores coherente
 
 ### Desarrollo
 - **Nodemon**: Reinicio automático del servidor durante desarrollo
 - **Git**: Control de versiones
-## 🚀 Instalación
-
-### Prerrequisitos
-
-- **Node.js** (versión 14 o superior)
-- **npm** (incluido con Node.js)
-- Un navegador web moderno
-
 ### Pasos de Instalación
 
 1. **Clonar el repositorio**
@@ -273,9 +279,27 @@ Cliente redirige a index.html (login)
 
 - ✅ **Validación de Credenciales**: Verificación en servidor
 - ✅ **Tokens de Sesión**: Autenticación basada en tokens
-- ✅ **Códigos HTTP Apropiados**: 401 (No autenticado), 403 (Sin permisos)
+- ✅ **Códigos HTTP Apropiados con Mensajes Descriptivos**: 
+  - 400 Bad Request (datos faltantes)
+  - 401 Unauthorized (credenciales incorrectas) + código en JSON
+  - 403 Forbidden (sin token o token inválido) + código en JSON
+- ✅ **Protección de Rutas**: 
+  - Backend: Validación de token en cada petición
+  - Frontend: Redirección a forbidden.html si no hay token o es inválido
 - ✅ **CORS Configurado**: Control de orígenes permitidos
-- ✅ **Validación de Headers**: Verificación de token en cada petición protegida
+- ✅ **Validación de Headers**: Verificación de token en cabecera Authorization
+- ✅ **Limpieza Automática**: Token eliminado al acceder a forbidden.html
+
+### Flujo de Seguridad
+```
+Intento de Acceso
+        ↓
+¿Existe token?
+    ├─ NO → 403 Forbidden (forbidden.html)
+    └─ SÍ → ¿Token válido en servidor?
+                ├─ NO → 403 Forbidden (forbidden.html)
+                └─ SÍ → Acceso concedido (welcome.html)
+```
 
 ### ⚠️ Limitaciones de Seguridad (Para Entorno de Producción)
 
@@ -291,7 +315,7 @@ Cliente redirige a index.html (login)
 
 3. **Tokens sin expiración**
    - ❌ Actualmente: Tokens válidos indefinidamente
-   - ✅ Producción: Implementar expiración automática
+   - ✅ Producción: Implementar expiración automática (ej: 1 hora)
 
 4. **Almacenamiento en memoria**
    - ❌ Actualmente: Tokens en objeto JavaScript (se pierden al reiniciar)
@@ -299,8 +323,11 @@ Cliente redirige a index.html (login)
 
 5. **Sin HTTPS**
    - ❌ Actualmente: HTTP sin cifrar
-   - ✅ Producción: HTTPS obligatorio
+   - ✅ Producción: HTTPS obligatorio para proteger tokens en tránsito
 
+6. **Sin Rate Limiting**
+   - ❌ Actualmente: Intentos de login ilimitados
+   - ✅ Producción: Limitar intentos (ej: 5 intentos cada 15 minutos)
 ---
 
 ## 🎯 Mejoras Futuras
@@ -335,28 +362,42 @@ Cliente redirige a index.html (login)
 ### Caso de Prueba 2: Login Fallido
 1. Ir a `http://localhost:3000`
 2. Ingresar credenciales incorrectas
-3. **Resultado esperado**: Mensaje de error "Credenciales inválidas"
+3. **Resultado esperado**: Mensaje de error "**Error 401: Credenciales inválidas**"
 
 ### Caso de Prueba 3: Acceso Sin Autenticación
 1. Ir directamente a `http://localhost:3000/welcome.html` (sin hacer login)
-2. **Resultado esperado**: Redirigir automáticamente a `index.html`
+2. **Resultado esperado**: Redirigir automáticamente a `forbidden.html` con mensaje "403 - Acceso Denegado"
 
 ### Caso de Prueba 4: Token Inválido
 1. Hacer login correctamente
 2. Abrir DevTools → Application → Local Storage
-3. Modificar el valor de `authToken`
+3. Modificar el valor de `authToken` a cualquier texto (ej: `token-falso`)
 4. Recargar `welcome.html`
-5. **Resultado esperado**: Redirigir a `forbidden.html`
+5. **Resultado esperado**: 
+   - Consola muestra logs de error 403
+   - Redirigir a `forbidden.html` con mensaje "403 - Acceso Denegado"
 
 ### Caso de Prueba 5: Cerrar Sesión
 1. Hacer login correctamente
-2. Hacer clic en "Cerrar Sesión"
+2. Hacer clic en "🚪 Cerrar Sesión"
 3. **Resultado esperado**: 
    - Redirigir a `index.html`
    - Token eliminado de localStorage
    - No poder acceder a `welcome.html` sin volver a hacer login
 
----
+### Caso de Prueba 6: Persistencia de Sesión
+1. Hacer login correctamente
+2. Cerrar el navegador completamente
+3. Volver a abrir y navegar a `http://localhost:3000/welcome.html`
+4. **Resultado esperado**: Acceso directo a la pantalla de bienvenida (sesión persistente)
+
+### Caso de Prueba 7: Navegación desde Forbidden
+1. Acceder a `forbidden.html` (por cualquier método)
+2. Hacer clic en "Volver al Login"
+3. **Resultado esperado**: 
+   - Token eliminado automáticamente al cargar `forbidden.html`
+   - Redirigir a `index.html`
+   - Ver formulario de login sin redirecciones automáticas
 
 ## 🐛 Solución de Problemas
 

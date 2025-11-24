@@ -7,41 +7,43 @@
     <link rel="stylesheet" href="css/indexStyles.css">
 </head>
 <body>
-    <div class="login-container">
-        <h1>Iniciar Sesión</h1>
-        
-        <div id="errorMessage" class="error-message"></div>
+    <div class="index-card">
+        <div class="card-body">
+            <h1 class="card-title">Iniciar Sesión</h1>
+            
+            <div id="errorMessage" class="error-message"></div>
 
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="username">Nombre de usuario</label>
-                <input 
-                    type="text" 
-                    id="username" 
-                    name="username" 
-                    required
-                    autocomplete="username"
-                >
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Nombre de usuario</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        required
+                        autocomplete="username"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
+
+                <button type="submit" class="submit-button">Iniciar Sesión</button>
+            </form>
+
+            <div class="info">
+                <h3>Usuarios de prueba:</h3>
+                <p><strong>admin</strong> / 1234</p>
+                <p><strong>user</strong> / abcd</p>
             </div>
-
-            <div class="form-group">
-                <label for="password">Contraseña</label>
-                <input 
-                    type="password" 
-                    id="password" 
-                    name="password" 
-                    required
-                    autocomplete="current-password"
-                >
-            </div>
-
-            <button type="submit">Iniciar Sesión</button>
-        </form>
-
-        <div class="info">
-            <h3>Usuarios de prueba:</h3>
-            <p><strong>admin</strong> / 1234</p>
-            <p><strong>user</strong> / abcd</p>
         </div>
     </div>
 

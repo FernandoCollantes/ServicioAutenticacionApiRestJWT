@@ -1,6 +1,11 @@
+console.log('login.js cargado');
+
 // Redirigir si ya está autenticado
 if (Auth.isAuthenticated()) {
+    console.log('Ya está autenticado - Redirigiendo a welcome');
     window.location.href = 'welcome.html';
+} else {
+    console.log('No autenticado - Mostrando formulario de login');
 }
 
 const loginForm = document.getElementById('loginForm');
@@ -28,8 +33,11 @@ loginForm.addEventListener('submit', async (e) => {
             Auth.saveToken(data.token);
             window.location.href = 'welcome.html';
         } else {
-            // Mostrar error
-            showError(data.error || 'Error al iniciar sesión');
+            // Mostrar código de error junto al mensaje
+            const errorText = data.code 
+                ? `Error ${data.code}: ${data.error}`
+                : data.error || 'Error al iniciar sesión';
+            showError(errorText);
         }
     } catch (error) {
         showError('Error de conexión con el servidor');

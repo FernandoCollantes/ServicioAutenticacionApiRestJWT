@@ -1,4 +1,5 @@
-/* Estilos para la página Forbidden */
+/* Estilos para la página de acceso denegado */
+
 * {
   margin: 0;
   padding: 0;
@@ -7,43 +8,64 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #bb0e0e; /* rojo suave */
+  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Para centrar correctamente */
+  padding: 2vh 2vw;
 }
 
 .forbidden-card {
-  background: #fdfdfd;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  background: white;
+  padding: 5vh 4vw;
+  border-radius: 1vmin;
+  box-shadow: 0 1vh 2.5vh rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 50vw;
   text-align: center;
-  max-width: 500px;
 }
 
-h1 {
-  margin-bottom: 20px;
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vh;
 }
 
-p {
-  color: #666;
-  margin-bottom: 30px;
-  font-size: 18px;
+.card-title {
+  color: #e74c3c;
+  margin-bottom: 2vh;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.card-text {
+  color: #4a5568;
+  margin-bottom: 3vh;
+  font-size: clamp(1rem, 2vw, 1.2rem);
 }
 
 .home-button {
-  padding: 12px 30px;
-  background: linear-gradient(135deg, #667eea 0%, #4a494b 100%);
+  padding: 1.5vh 3vw;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 0.5vmin;
   font-weight: bold;
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
   display: inline-block;
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .home-button:hover {
-  transform: translateY(-2px);
+  transform: translateY(-0.3vh);
+  box-shadow: 0 0.5vh 1.5vh rgba(102, 126, 234, 0.3);
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .forbidden-card {
+    max-width: 90vw;
+    padding: 4vh 6vw;
+  }
 }

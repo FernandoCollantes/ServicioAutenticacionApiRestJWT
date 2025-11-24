@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenido - Panel de Usuario</title>
     <link rel="stylesheet" href="css/welcomeStyles.css">
-    
 </head>
-
 <body>
-    <div class="welcome-container">
-        <div id="loadingMessage" class="loading">
-            Cargando información...
-        </div>
+    <div class="welcome-card">
+        <div class="card-body">
+            <div id="loadingMessage" class="loading">
+                Cargando información...
+            </div>
 
-        <div id="welcomeContent">
-            <h1>¡Bienvenido, <span class="username" id="username"></span>!</h1>
+            <div id="welcomeContent">
+                <h1 class="card-title">¡Bienvenido, <span class="username" id="username"></span>!</h1>
 
-            <div class="info-box">
-                <div class="info-item">
-                    <strong>Hora actual:</strong>
-                    <span id="currentTime"></span>
+                <div class="info-box">
+                    <div class="info-item">
+                        <strong>Hora actual:</strong>
+                        <span id="currentTime"></span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Mensaje:</strong>
+                        <span id="welcomeMessage"></span>
+                    </div>
                 </div>
-                <div class="info-item">
-                    <strong>Mensaje:</strong>
-                    <span id="welcomeMessage"></span>
-                </div>
-                <!-- BOTÓN DE PRUEBA TEMPORAL -->
-                <button class="IT-button" id="ITButton" onclick="probarTokenInvalido()">
-                    PRUEBA: Invalidar Token
-                </button>
+
+                
                 <button class="logout-button" id="logoutButton">
                     Cerrar Sesión
                 </button>
@@ -41,5 +38,4 @@
     <script src="js/auth.js"></script>
     <script src="js/welcome.js"></script>
 </body>
-
 </html>

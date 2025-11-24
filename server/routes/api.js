@@ -7,7 +7,7 @@ const usuarios = [
     { username: "user", password: "abcd" }
 ];
 
-// Almacén temporal de tokens (en producción se usaría una BD)
+// Almacén temporal de tokens (en producción usarías una BD)
 const tokens = {};
 
 // POST /api/login - Autenticación
@@ -17,7 +17,8 @@ router.post('/login', (req, res) => {
     // Validar que se envían credenciales
     if (!username || !password) {
         return res.status(400).json({ 
-            error: 'Username y password son requeridos' 
+            error: 'Username y password son requeridos',
+            code: 400
         });
     }
 
@@ -42,8 +43,10 @@ router.post('/login', (req, res) => {
             username: usuario.username
         });
     } else {
+        //  Incluir código de error en la respuesta
         res.status(401).json({ 
-            error: 'Credenciales inválidas' 
+            error: 'Credenciales inválidas',
+            code: 401
         });
     }
 });
@@ -55,7 +58,8 @@ router.get('/welcome', (req, res) => {
     
     if (!authHeader) {
         return res.status(403).json({ 
-            error: 'No se proporcionó token de autenticación' 
+            error: 'No se proporcionó token de autenticación',
+            code: 403
         });
     }
 
@@ -65,7 +69,8 @@ router.get('/welcome', (req, res) => {
     // Validar token
     if (!tokens[token]) {
         return res.status(403).json({ 
-            error: 'Token inválido o expirado' 
+            error: 'Token inválido o expirado',
+            code: 403
         });
     }
 
@@ -87,7 +92,7 @@ router.post('/logout', (req, res) => {
     
     if (authHeader) {
         const token = authHeader.split(' ')[1];
-        delete tokens[token]; // Eliminar token del almacén
+        delete tokens[token];
     }
 
     res.json({ 
