@@ -1,4 +1,4 @@
-console.log('🟢 welcome.js cargado');
+console.log('welcome.js cargado');
 
 // Si no hay token, ir a forbidden en lugar de login
 if (!Auth.isAuthenticated()) {
